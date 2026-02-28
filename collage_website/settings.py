@@ -108,3 +108,7 @@ LOGOUT_REDIRECT_URL = 'home'
 # =========================
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'no-reply@univio.com'
+
+# Razorpay
+RAZORPAY_KEY_ID = 'rzp_test_SLYrLj0iZMZOK9'      # apni Key ID daalo
+RAZORPAY_KEY_SECRET = '284anbLyo6SQC9cQ3cgXjrFn'    # apna Key Secret daalo

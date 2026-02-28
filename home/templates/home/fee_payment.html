@@ -1,0 +1,62 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block title %}Fee Payment - Univio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    <div class="container" style="max-width:600px;">
+
+        <div class="section-card" data-aos="fade-up">
+            <h3>💳 Fee Payment</h3>
+
+            <table class="fee-table mt-3">
+                <tr><th>Student</th><td>{{ user.username }}</td></tr>
+                <tr><th>Email</th><td>{{ user.email }}</td></tr>
+                <tr><th>Course</th><td>{% if admission %}{{ admission.course }}{% else %}—{% endif %}</td></tr>
+                <tr><th>Amount</th><td><strong>₹45,000</strong></td></tr>
+            </table>
+
+            <button id="pay-btn" class="btn btn-warning w-100 mt-4" style="padding:14px; font-size:1.1rem; font-weight:700; border-radius:50px;">
+                💳 Pay Now ₹45,000
+            </button>
+
+            <div class="text-center mt-3">
+                <a href="{% url 'dashboard' %}" class="text-decoration-none">← Back to Dashboard</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    document.getElementById('pay-btn').onclick = function(e) {
+        var options = {
+            key: "{{ razorpay_key }}",
+            amount: "{{ amount }}",
+            currency: "INR",
+            name: "Univio College",
+            description: "Fee Payment",
+            order_id: "{{ order.id }}",
+            prefill: {
+                name: "{{ user.username }}",
+                email: "{{ user.email }}",
+            },
+            theme: {
+                color: "#ffcc00"
+            },
+            handler: function(response) {
+                window.location.href = "{% url 'payment_success' %}";
+            }
+        };
+        var rzp = new Razorpay(options);
+        rzp.open();
+        e.preventDefault();
+    };
+</script>
+{% endblock %}

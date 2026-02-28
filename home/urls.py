@@ -19,4 +19,6 @@ urlpatterns = [
     path('profile/', views.profile_view, name='profile'),
     path('notices/', views.notice_board_view, name='notice_board'),
     path('fee-receipt/', views.fee_receipt_pdf, name='fee_receipt'),
-]  
+    path('fee-payment/', views.fee_payment_view, name='fee_payment'),
+    path('payment-success/', views.payment_success, name='payment_success'),
+]

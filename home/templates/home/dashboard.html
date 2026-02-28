@@ -148,9 +148,9 @@
                         </tbody>
                     </table>
                     <div class="fee-actions">
-                        <button class="dash-btn dash-btn-accent" onclick="alert('Payment Gateway Coming Soon!')">
+                        <a href="{% url 'fee_payment' %}" class="dash-btn dash-btn-accent">
                             <i class="fa-solid fa-credit-card"></i> Pay Now
-                        </button>
+                        </a>
                         <a href="{% url 'fee_receipt' %}" class="dash-btn dash-btn-outline">
                             <i class="fa-solid fa-file-pdf"></i> Download Receipt
                         </a>
@@ -209,6 +209,11 @@
                         <a href="{% url 'notice_board' %}" class="quick-link">
                             <span class="ql-icon"><i class="fa-solid fa-bell"></i></span>
                             <span>Notices</span>
+                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
+                        </a>
+                        <a href="{% url 'fee_payment' %}" class="quick-link">
+                            <span class="ql-icon"><i class="fa-solid fa-credit-card"></i></span>
+                            <span>Pay Fee</span>
                             <i class="fa-solid fa-chevron-right ql-arrow"></i>
                         </a>
                         <a href="{% url 'fee_receipt' %}" class="quick-link">
