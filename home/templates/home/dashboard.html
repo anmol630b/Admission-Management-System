@@ -1,0 +1,231 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block title %}Dashboard - Univio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    <div class="container">
+
+        <!-- WELCOME CARD -->
+        <div class="welcome-card" data-aos="fade-down">
+            <div class="welcome-avatar-wrap">
+                {% if user.profile_photo %}
+                    <img src="{{ user.profile_photo.url }}" class="avatar" style="object-fit:cover;">
+                {% else %}
+                    <div class="avatar">{{ user.username|first|upper }}</div>
+                {% endif %}
+                <span class="avatar-online"></span>
+            </div>
+            <div class="welcome-info">
+                <span class="welcome-tag">Student Portal</span>
+                <h2>Welcome back, {{ user.username }}! 👋</h2>
+                <p class="welcome-email"><i class="fa-solid fa-envelope"></i> {{ user.email }}</p>
+                <p class="welcome-since"><i class="fa-regular fa-calendar"></i> Member since {{ user.date_joined|date:"F Y" }}</p>
+                <a href="{% url 'profile' %}" class="edit-profile-btn">
+                    <i class="fa-solid fa-pen"></i> Edit Profile
+                </a>
+            </div>
+            <div class="welcome-decoration"></div>
+        </div>
+
+        <!-- STAT CARDS -->
+        <div class="stat-cards" data-aos="fade-up">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg,#ff7b00,#ffb347);">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>Admission Status</h4>
+                    <p>
+                        {% if admission %}
+                            <span class="status-badge status-pending">Under Review</span>
+                        {% else %}
+                            <span class="status-badge status-rejected">Not Applied</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg,#0d6efd,#6ea8fe);">
+                    <i class="fa-solid fa-book"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>Enrolled Course</h4>
+                    <p>{% if admission %}{{ admission.course }}{% else %}—{% endif %}</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg,#198754,#57c287);">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>Fee Status</h4>
+                    <p class="fee-pending">Pending</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg,#ffc107,#ffe066);">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>Notices</h4>
+                    <p>{{ notices.count }} New</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- LEFT COLUMN -->
+            <div class="col-lg-8">
+
+                <!-- ADMISSION DETAILS -->
+                <div class="section-card" data-aos="fade-up">
+                    <div class="card-header-row">
+                        <h3><i class="fa-solid fa-clipboard-list"></i> Admission Details</h3>
+                    </div>
+                    {% if admission %}
+                        <table class="fee-table">
+                            <tr><th>Name</th><td>{{ admission.name }}</td></tr>
+                            <tr><th>Father's Name</th><td>{{ admission.father_name }}</td></tr>
+                            <tr><th>Course</th><td>{{ admission.course }}</td></tr>
+                            <tr><th>Phone</th><td>{{ admission.phone }}</td></tr>
+                            <tr><th>Applied On</th><td>{{ admission.submitted_at|date:"d M Y" }}</td></tr>
+                            <tr>
+                                <th>Status</th>
+                                <td><span class="status-badge status-pending">Under Review</span></td>
+                            </tr>
+                        </table>
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fa-solid fa-file-circle-xmark"></i>
+                            <p>You haven't applied for admission yet.</p>
+                            <a href="{% url 'admission' %}" class="dash-btn dash-btn-accent">Apply Now</a>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- ENROLLED COURSES -->
+                <div class="section-card" data-aos="fade-up">
+                    <div class="card-header-row">
+                        <h3><i class="fa-solid fa-graduation-cap"></i> Enrolled Courses</h3>
+                    </div>
+                    {% if admission %}
+                        <div class="course-item">
+                            <div class="course-icon">{{ admission.course|first }}</div>
+                            <div class="course-meta">
+                                <strong>{{ admission.course }}</strong>
+                                <p>Duration: 3 Years</p>
+                            </div>
+                            <span class="status-badge status-pending ms-auto">Pending</span>
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fa-solid fa-book-open"></i>
+                            <p>No course enrolled yet.</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- FEE STATUS -->
+                <div class="section-card" data-aos="fade-up">
+                    <div class="card-header-row">
+                        <h3><i class="fa-solid fa-credit-card"></i> Fee Payment Status</h3>
+                    </div>
+                    <table class="fee-table">
+                        <thead>
+                            <tr><th>Year</th><th>Amount</th><th>Status</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1st Year</td><td>₹45,000</td><td><span class="fee-pending">Pending</span></td></tr>
+                            <tr><td>2nd Year</td><td>₹45,000</td><td><span class="fee-pending">Pending</span></td></tr>
+                            <tr><td>3rd Year</td><td>₹45,000</td><td><span class="fee-pending">Pending</span></td></tr>
+                        </tbody>
+                    </table>
+                    <div class="fee-actions">
+                        <button class="dash-btn dash-btn-accent" onclick="alert('Payment Gateway Coming Soon!')">
+                            <i class="fa-solid fa-credit-card"></i> Pay Now
+                        </button>
+                        <a href="{% url 'fee_receipt' %}" class="dash-btn dash-btn-outline">
+                            <i class="fa-solid fa-file-pdf"></i> Download Receipt
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="col-lg-4">
+
+                <!-- NOTICES -->
+                <div class="section-card" data-aos="fade-up">
+                    <div class="card-header-row">
+                        <h3><i class="fa-solid fa-bell"></i> Notices</h3>
+                        {% if notices %}
+                            <span class="notice-count">{{ notices.count }}</span>
+                        {% endif %}
+                    </div>
+                    {% if notices %}
+                        {% for notice in notices %}
+                            <div class="notice-item
+                                {% if notice.priority == 'high' %}notice-high
+                                {% elif notice.priority == 'medium' %}notice-medium
+                                {% else %}notice-low{% endif %}">
+                                <h6>{{ notice.title }}</h6>
+                                <small><i class="fa-regular fa-calendar"></i> {{ notice.created_at|date:"d M Y" }}</small>
+                                <p>{{ notice.content|truncatewords:15 }}</p>
+                            </div>
+                        {% endfor %}
+                        <a href="{% url 'notice_board' %}" class="dash-btn dash-btn-full">View All Notices</a>
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fa-regular fa-bell-slash"></i>
+                            <p>No notices at the moment.</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- QUICK LINKS -->
+                <div class="section-card" data-aos="fade-up">
+                    <div class="card-header-row">
+                        <h3><i class="fa-solid fa-link"></i> Quick Links</h3>
+                    </div>
+                    <div class="quick-links">
+                        <a href="{% url 'admission' %}" class="quick-link">
+                            <span class="ql-icon"><i class="fa-solid fa-file-pen"></i></span>
+                            <span>Admission</span>
+                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
+                        </a>
+                        <a href="{% url 'contact' %}" class="quick-link">
+                            <span class="ql-icon"><i class="fa-solid fa-phone"></i></span>
+                            <span>Contact</span>
+                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
+                        </a>
+                        <a href="{% url 'notice_board' %}" class="quick-link">
+                            <span class="ql-icon"><i class="fa-solid fa-bell"></i></span>
+                            <span>Notices</span>
+                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
+                        </a>
+                        <a href="{% url 'fee_receipt' %}" class="quick-link">
+                            <span class="ql-icon"><i class="fa-solid fa-file-pdf"></i></span>
+                            <span>Fee Receipt</span>
+                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
+                        </a>
+                        <a href="{% url 'logout' %}" class="quick-link quick-link-danger">
+                            <span class="ql-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                            <span>Logout</span>
+                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

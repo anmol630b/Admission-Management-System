@@ -1,0 +1,445 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block title %}Admissions - Univio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admission.css' %}">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="admission-hero" style="background: url('{% static "images/about.jpg" %}') center/cover no-repeat;">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <span class="hero-badge" data-aos="fade-down">Admissions Open 2026</span>
+        <h1 data-aos="fade-down" data-aos-delay="100">Shape Your Future With Univio</h1>
+        <p data-aos="fade-up" data-aos-delay="200">Start Your Academic Journey With Excellence</p>
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="300">
+            <a href="#apply" class="apply-btn"><span>Apply Now</span><i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#" class="brochure-btn"><i class="fa-solid fa-download"></i><span>Download Brochure</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar">
+    <div class="container">
+        <span><a href="{% url 'home' %}">Home</a> &rsaquo; Admissions</span>
+    </div>
+</div>
+
+<!-- WHY CHOOSE US -->
+<section class="why-us">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Why Choose Univio</h2>
+        <p class="section-subtitle" data-aos="fade-up">Excellence that sets us apart from the rest.</p>
+        <div class="why-grid">
+            <div class="why-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="why-img-wrap">
+                    <img src="{% static 'images/about.jpg' %}" alt="Faculty">
+                    <div class="why-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                </div>
+                <h3>Expert Faculty</h3>
+                <p>Highly qualified and experienced professors dedicated to your growth.</p>
+            </div>
+            <div class="why-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="why-img-wrap">
+                    <img src="{% static 'images/about.jpg' %}" alt="Placement">
+                    <div class="why-icon"><i class="fa-solid fa-briefcase"></i></div>
+                </div>
+                <h3>100% Placement Support</h3>
+                <p>Strong industry connections & career guidance at every step.</p>
+            </div>
+            <div class="why-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="why-img-wrap">
+                    <img src="{% static 'images/about.jpg' %}" alt="Campus">
+                    <div class="why-icon"><i class="fa-solid fa-building-columns"></i></div>
+                </div>
+                <h3>Modern Campus</h3>
+                <p>Smart classrooms, advanced labs & world-class infrastructure.</p>
+            </div>
+            <div class="why-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="why-img-wrap">
+                    <img src="{% static 'images/about.jpg' %}" alt="Scholarship">
+                    <div class="why-icon"><i class="fa-solid fa-medal"></i></div>
+                </div>
+                <h3>Scholarship Programs</h3>
+                <p>Merit & financial support schemes available for deserving students.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COURSES -->
+<section class="courses">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Courses Offered</h2>
+        <p class="section-subtitle" data-aos="fade-up">Choose the program that matches your passion.</p>
+        <div class="course-grid">
+            <div class="course-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="course-img-wrap"><img src="{% static 'images/about.jpg' %}" alt="BCA"></div>
+                <div class="course-body">
+                    <span class="course-tag">Technology</span>
+                    <h3>BCA</h3>
+                    <p><i class="fa-regular fa-clock"></i> Duration: 3 Years</p>
+                    <p><i class="fa-solid fa-graduation-cap"></i> Eligibility: 12th with Math</p>
+                    <a href="#apply" class="course-apply-btn">Apply Now</a>
+                </div>
+            </div>
+            <div class="course-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="course-img-wrap"><img src="{% static 'images/about.jpg' %}" alt="B.Com"></div>
+                <div class="course-body">
+                    <span class="course-tag">Commerce</span>
+                    <h3>B.Com</h3>
+                    <p><i class="fa-regular fa-clock"></i> Duration: 3 Years</p>
+                    <p><i class="fa-solid fa-graduation-cap"></i> Eligibility: 12th Commerce</p>
+                    <a href="#apply" class="course-apply-btn">Apply Now</a>
+                </div>
+            </div>
+            <div class="course-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="course-img-wrap"><img src="{% static 'images/about.jpg' %}" alt="MBA"></div>
+                <div class="course-body">
+                    <span class="course-tag">Management</span>
+                    <h3>MBA</h3>
+                    <p><i class="fa-regular fa-clock"></i> Duration: 2 Years</p>
+                    <p><i class="fa-solid fa-graduation-cap"></i> Eligibility: Graduation</p>
+                    <a href="#apply" class="course-apply-btn">Apply Now</a>
+                </div>
+            </div>
+            <div class="course-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="course-img-wrap"><img src="{% static 'images/about.jpg' %}" alt="B.Sc"></div>
+                <div class="course-body">
+                    <span class="course-tag">Science</span>
+                    <h3>B.Sc</h3>
+                    <p><i class="fa-regular fa-clock"></i> Duration: 3 Years</p>
+                    <p><i class="fa-solid fa-graduation-cap"></i> Eligibility: 12th Science</p>
+                    <a href="#apply" class="course-apply-btn">Apply Now</a>
+                </div>
+            </div>
+            <div class="course-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="course-img-wrap"><img src="{% static 'images/about.jpg' %}" alt="BA"></div>
+                <div class="course-body">
+                    <span class="course-tag">Arts</span>
+                    <h3>BA</h3>
+                    <p><i class="fa-regular fa-clock"></i> Duration: 3 Years</p>
+                    <p><i class="fa-solid fa-graduation-cap"></i> Eligibility: 12th Arts</p>
+                    <a href="#apply" class="course-apply-btn">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ADMISSION PROCESS -->
+<section class="process">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Admission Process</h2>
+        <p class="section-subtitle" data-aos="fade-up">Simple steps to begin your journey.</p>
+        <div class="process-steps">
+            <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                <div class="step-num">01</div>
+                <div class="step-info">
+                    <h4>Apply Online</h4>
+                    <p>Fill the application form with your details.</p>
+                </div>
+            </div>
+            <div class="process-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                <div class="step-num">02</div>
+                <div class="step-info">
+                    <h4>Document Verification</h4>
+                    <p>Submit required documents for review.</p>
+                </div>
+            </div>
+            <div class="process-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                <div class="step-num">03</div>
+                <div class="step-info">
+                    <h4>Interview</h4>
+                    <p>Attend a brief personal interview.</p>
+                </div>
+            </div>
+            <div class="process-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="400">
+                <div class="step-num">04</div>
+                <div class="step-info">
+                    <h4>Fee Payment</h4>
+                    <p>Complete the fee payment process.</p>
+                </div>
+            </div>
+            <div class="process-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="500">
+                <div class="step-num">05</div>
+                <div class="step-info">
+                    <h4>Confirmation</h4>
+                    <p>Receive your admission confirmation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DOCUMENTS -->
+<section class="documents">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Required Documents</h2>
+        <p class="section-subtitle" data-aos="fade-up">Keep these ready before applying.</p>
+        <div class="doc-grid">
+            <div class="doc-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fa-solid fa-file-alt"></i>
+                <span>10th & 12th Marksheet</span>
+            </div>
+            <div class="doc-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa-solid fa-file-invoice"></i>
+                <span>Transfer Certificate</span>
+            </div>
+            <div class="doc-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fa-solid fa-camera"></i>
+                <span>Passport Size Photos</span>
+            </div>
+            <div class="doc-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fa-solid fa-id-card"></i>
+                <span>Aadhar Card</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SCHOLARSHIP -->
+<section class="scholarship">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Scholarships Available</h2>
+        <p class="section-subtitle" data-aos="fade-up">We believe talent should never be limited by finances.</p>
+        <div class="scholar-grid">
+            <div class="scholar-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fa-solid fa-star"></i>
+                <h4>Merit Based</h4>
+                <p>For students with outstanding academic performance.</p>
+            </div>
+            <div class="scholar-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa-solid fa-users"></i>
+                <h4>SC/ST/OBC</h4>
+                <p>Government-backed scholarships for reserved categories.</p>
+            </div>
+            <div class="scholar-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fa-solid fa-futbol"></i>
+                <h4>Sports Quota</h4>
+                <p>Special provisions for state & national level athletes.</p>
+            </div>
+            <div class="scholar-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <h4>Financial Assistance</h4>
+                <p>Support for economically weaker sections of society.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEES -->
+<section class="fees">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Fee Structure</h2>
+        <p class="section-subtitle" data-aos="fade-up">Transparent and affordable pricing for quality education.</p>
+        <div class="table-wrap" data-aos="fade-up" data-aos-delay="100">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>1st Year</th>
+                        <th>2nd Year</th>
+                        <th>3rd Year</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="course-name">BCA</span></td>
+                        <td>₹45,000</td><td>₹45,000</td><td>₹45,000</td>
+                        <td><strong>₹1,35,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><span class="course-name">B.Com</span></td>
+                        <td>₹30,000</td><td>₹30,000</td><td>₹30,000</td>
+                        <td><strong>₹90,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><span class="course-name">MBA</span></td>
+                        <td>₹85,000</td><td>₹85,000</td><td>₹85,000</td>
+                        <td><strong>₹2,55,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><span class="course-name">B.Sc</span></td>
+                        <td>₹40,000</td><td>₹40,000</td><td>₹40,000</td>
+                        <td><strong>₹1,20,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><span class="course-name">BA</span></td>
+                        <td>₹35,000</td><td>₹35,000</td><td>₹35,000</td>
+                        <td><strong>₹1,05,000</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+    <div class="container">
+        <div class="stat-box" data-aos="fade-up">
+            <h3 class="counter" data-target="5000">0</h3>
+            <p>Students Enrolled</p>
+        </div>
+        <div class="stat-box" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="counter" data-target="150">0</h3>
+            <p>Expert Faculty</p>
+        </div>
+        <div class="stat-box" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="counter" data-target="98">0</h3>
+            <p>Placement Rate %</p>
+        </div>
+        <div class="stat-box" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="counter" data-target="25">0</h3>
+            <p>Years of Excellence</p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Frequently Asked Questions</h2>
+        <p class="section-subtitle" data-aos="fade-up">Got questions? We have answers.</p>
+        <div class="faq-list">
+            <details data-aos="fade-up" data-aos-delay="100">
+                <summary><i class="fa-solid fa-circle-question"></i> Is hostel available?<i class="fa-solid fa-chevron-down faq-arrow"></i></summary>
+                <p>Yes, separate hostel facilities are available for boys and girls with all basic amenities.</p>
+            </details>
+            <details data-aos="fade-up" data-aos-delay="200">
+                <summary><i class="fa-solid fa-circle-question"></i> Is scholarship available?<i class="fa-solid fa-chevron-down faq-arrow"></i></summary>
+                <p>Yes, scholarships are available based on merit, category, and financial need.</p>
+            </details>
+            <details data-aos="fade-up" data-aos-delay="300">
+                <summary><i class="fa-solid fa-circle-question"></i> What is the last date to apply?<i class="fa-solid fa-chevron-down faq-arrow"></i></summary>
+                <p>Applications close on 30th June 2026. Apply early to secure your seat.</p>
+            </details>
+            <details data-aos="fade-up" data-aos-delay="400">
+                <summary><i class="fa-solid fa-circle-question"></i> Is there an entrance exam?<i class="fa-solid fa-chevron-down faq-arrow"></i></summary>
+                <p>Some courses require an entrance test. Details will be shared after registration.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- ADMISSION FORM -->
+<section class="admission-form" id="apply">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Apply For Admission</h2>
+        <p class="section-subtitle" data-aos="fade-up">Fill in your details and we'll get back to you shortly.</p>
+        <form method="POST" enctype="multipart/form-data" class="apply-form" data-aos="fade-up" data-aos-delay="100">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" placeholder="e.g. Rahul Sharma" required>
+                </div>
+                <div class="form-group">
+                    <label>Father's Name</label>
+                    <input type="text" name="father_name" placeholder="e.g. Suresh Sharma" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="e.g. rahul@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone" placeholder="e.g. +91 98765 43210" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" name="dob" required>
+                </div>
+                <div class="form-group">
+                    <label>Select Course</label>
+                    <select name="course" required>
+                        <option value="" disabled selected>Choose a course</option>
+                        <option>BCA</option>
+                        <option>B.Com</option>
+                        <option>MBA</option>
+                        <option>B.Sc</option>
+                        <option>BA</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Upload Documents</label>
+                <input type="file" name="documents">
+            </div>
+            <div class="form-group">
+                <label>Additional Information</label>
+                <textarea name="message" rows="4" placeholder="Any additional info..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn"><span>Submit Application</span><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+    </div>
+</section>
+
+<!-- PAYMENT DEMO -->
+<section class="payment-demo" data-aos="fade-up">
+    <div class="container">
+        <div class="payment-card">
+            <div class="payment-info">
+                <i class="fa-solid fa-shield-halved"></i>
+                <div>
+                    <h3>Secure Fee Payment</h3>
+                    <p>Pay your admission fee safely through our secure payment gateway.</p>
+                </div>
+            </div>
+            <button onclick="alert('Payment Demo!');" class="pay-btn"><i class="fa-solid fa-lock"></i> Pay Now</button>
+        </div>
+    </div>
+</section>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/00000000000" class="whatsapp-float" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({ duration: 1000, once: true });
+
+const counters = document.querySelectorAll('.counter');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) {
+            const counter = entry.target;
+            const target = +counter.getAttribute('data-target');
+            let count = 0;
+            const increment = target / 200;
+            const update = () => {
+                if(count < target) {
+                    count += increment;
+                    counter.innerText = Math.ceil(count);
+                    requestAnimationFrame(update);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            update();
+            observer.unobserve(counter);
+        }
+    });
+}, { threshold: 0.5 });
+
+counters.forEach(c => observer.observe(c));
+</script>
+
+{% endblock %}

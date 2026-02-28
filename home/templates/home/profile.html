@@ -1,0 +1,148 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block title %}Profile - Univio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-wrapper">
+    <div class="container">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="profile-alert">
+                    <i class="fa-solid fa-circle-check"></i> {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="profile-grid">
+
+            <!-- LEFT SIDEBAR -->
+            <div class="profile-sidebar" data-aos="fade-right">
+
+                <div class="profile-header">
+                    <div class="avatar-wrap">
+                        {% if user.profile_photo %}
+                            <img src="{{ user.profile_photo.url }}" class="profile-avatar" alt="Profile Photo">
+                        {% else %}
+                            <div class="profile-avatar-placeholder">{{ user.username|first|upper }}</div>
+                        {% endif %}
+                        <span class="avatar-online"></span>
+                    </div>
+                    <span class="profile-tag">Student</span>
+                    <h3>{{ user.username }}</h3>
+                    <p class="profile-email"><i class="fa-solid fa-envelope"></i> {{ user.email }}</p>
+                    <p class="profile-since"><i class="fa-regular fa-calendar"></i> Member since {{ user.date_joined|date:"F Y" }}</p>
+                </div>
+
+                <div class="sidebar-info">
+                    <div class="info-row">
+                        <span class="info-icon"><i class="fa-solid fa-user"></i></span>
+                        <div>
+                            <small>Username</small>
+                            <span>{{ user.username }}</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-icon"><i class="fa-solid fa-envelope"></i></span>
+                        <div>
+                            <small>Email</small>
+                            <span>{{ user.email }}</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-icon"><i class="fa-solid fa-phone"></i></span>
+                        <div>
+                            <small>Phone</small>
+                            <span>{% if user.phone %}{{ user.phone }}{% else %}Not added{% endif %}</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-icon"><i class="fa-solid fa-location-dot"></i></span>
+                        <div>
+                            <small>Address</small>
+                            <span>{% if user.address %}{{ user.address }}{% else %}Not added{% endif %}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="{% url 'dashboard' %}" class="back-btn">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+                </a>
+
+            </div>
+
+            <!-- RIGHT MAIN -->
+            <div class="profile-main" data-aos="fade-left">
+
+                <!-- UPDATE FORM -->
+                <div class="profile-card">
+                    <div class="card-header-row">
+                        <h4><i class="fa-solid fa-pen"></i> Update Profile</h4>
+                    </div>
+                    <form method="POST" enctype="multipart/form-data" class="profile-form">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Username</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Phone</label>
+                                {{ form.phone }}
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                {{ form.address }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Profile Photo</label>
+                            <div class="file-upload-wrap">
+                                {{ form.profile_photo }}
+                                <span class="file-upload-hint"><i class="fa-solid fa-cloud-arrow-up"></i> Upload a photo (JPG, PNG)</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="save-btn">
+                            <i class="fa-solid fa-floppy-disk"></i> <span>Save Changes</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="profile-card" data-aos="fade-up">
+                    <div class="card-header-row">
+                        <h4><i class="fa-solid fa-lock"></i> Change Password</h4>
+                    </div>
+                    <p class="card-desc">Keep your account secure by updating your password regularly.</p>
+                    <a href="{% url 'password_reset' %}" class="outline-btn">
+                        <i class="fa-solid fa-key"></i> Change Password
+                    </a>
+                </div>
+
+                <!-- DANGER ZONE -->
+                <div class="profile-card danger-card" data-aos="fade-up">
+                    <div class="card-header-row">
+                        <h4><i class="fa-solid fa-triangle-exclamation"></i> Danger Zone</h4>
+                    </div>
+                    <p class="card-desc">Once you delete your account, all data will be permanently removed. This action cannot be undone.</p>
+                    <button class="delete-btn" onclick="confirm('Kya sach mein account delete karna hai?') && window.location.replace('{% url 'logout' %}')">
+                        <i class="fa-solid fa-trash"></i> Delete Account
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

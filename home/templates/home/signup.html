@@ -1,0 +1,59 @@
+{% extends "home/base.html" %}
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 450px; margin-top: 100px;">
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-4">
+            <h3 class="card-title text-center mb-4" style="font-weight: 700;">Create Your Account</h3>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" action="{% url 'signup' %}">
+                {% csrf_token %}
+                
+                {{ form.non_field_errors }}
+
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    {{ form.username }}
+                    <small class="text-danger">{{ form.username.errors }}</small>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    {{ form.email }}
+                    <small class="text-danger">{{ form.email.errors }}</small>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    {{ form.password1 }}
+                    <small class="text-danger">{{ form.password1.errors }}</small>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Confirm Password</label>
+                    {{ form.password2 }}
+                    <small class="text-danger">{{ form.password2.errors }}</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mt-3">Signup</button>
+            </form>
+
+            <div class="text-center mt-3">
+                <p class="mb-0">
+                    Already have an account?
+                    <a href="{% url 'login' %}" class="fw-bold text-decoration-none">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "home/base.html" %}
+
+{% block title %}Admission Submitted{% endblock %}
+
+{% block content %}
+<section class="admission-success" style="text-align:center; padding:50px;">
+    <h2>Thank You!</h2>
+    <p>Your admission form has been submitted successfully.</p>
+    <a href="{% url 'home' %}" class="btn">Go to Home</a>
+</section>
+{% endblock %}

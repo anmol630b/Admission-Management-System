@@ -1,0 +1,41 @@
+{% extends "home/base.html" %}
+{% block title %}Login with OTP{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 450px; margin-top: 100px;">
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-4">
+            <h3 class="card-title text-center mb-4" style="font-weight: 700;">Login with OTP</h3>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" action="{% url 'login_otp' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter username" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Registered Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter registered email" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mt-3">Send OTP</button>
+            </form>
+
+            <div class="text-center mt-3">
+                <p class="mb-0">
+                    Simple login karna hai?
+                    <a href="{% url 'login' %}" class="fw-bold text-decoration-none">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

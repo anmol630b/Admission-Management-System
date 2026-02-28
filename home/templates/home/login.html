@@ -1,0 +1,120 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+<div class="login-page-wrapper">
+  <div class="login-card">
+
+    <!-- Logo -->
+    <div class="login-logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+    </div>
+
+    <h2 class="login-heading">Welcome Back</h2>
+    <p class="login-sub">Sign in to your Univio account</p>
+
+    <!-- Messages -->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="login-alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <!-- Form -->
+    <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+
+      {% if form %}
+        {% if form.non_field_errors %}
+          <ul class="errorlist">
+            {% for error in form.non_field_errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endif %}
+
+      <!-- Username -->
+      <div class="login-group">
+        <label for="username">Username or Email</label>
+        <div class="input-wrap">
+          <span class="input-icon"><i class="fas fa-user"></i></span>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter username"
+            required
+          >
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="login-group">
+        <div class="pass-label-row">
+          <label for="password">Password</label>
+          <a href="{% url 'password_reset' %}" class="forgot-link">Forgot Password?</a>
+        </div>
+        <div class="input-wrap">
+          <span class="input-icon"><i class="fas fa-lock"></i></span>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter password"
+            required
+          >
+          <button type="button" class="toggle-pass" onclick="togglePass()">
+            <i class="fas fa-eye" id="toggle-icon"></i>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="login-submit-btn">
+        <i class="fas fa-sign-in-alt"></i>
+        <span>Login</span>
+      </button>
+    </form>
+
+    <div class="login-divider">or</div>
+
+    <a href="{% url 'login_otp' %}" class="otp-btn">
+      <i class="fas fa-mobile-alt"></i>
+      Login with OTP instead
+    </a>
+
+    <div class="login-footer">
+      Don't have an account?
+      <a href="{% url 'signup' %}">Signup</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function togglePass() {
+    const input = document.getElementById('password');
+    const icon  = document.getElementById('toggle-icon');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.classList.replace('fa-eye', 'fa-eye-slash');
+    } else {
+      input.type = 'password';
+      icon.classList.replace('fa-eye-slash', 'fa-eye');
+    }
+  }
+</script>
+
+{% endblock %}
+```
+

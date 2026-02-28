@@ -1,0 +1,229 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block title %}About Us - Univio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero-section about-hero" style="background: url('{% static 'images/about.jpg' %}') center center / cover no-repeat;">
+    <div class="hero-overlay"></div>
+    <div class="hero-caption" data-aos="fade-down">
+        <span class="hero-badge">Est. 2000</span>
+        <h1>About Univio</h1>
+        <p>Excellence in Education, Shaping Bright Futures</p>
+    </div>
+</section>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar">
+    <div class="container">
+        <span><a href="{% url 'home' %}">Home</a> &rsaquo; About Us</span>
+    </div>
+</div>
+
+<!-- OUR MISSION & VISION -->
+<section class="mission-vision">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Our Mission & Vision</h2>
+        <p class="section-subtitle" data-aos="fade-up">Guided by purpose, driven by passion.</p>
+        <div class="mv-grid">
+            <div class="mv-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h3>Our Mission</h3>
+                <p>Empowering students with knowledge and skills for success in a global society.</p>
+            </div>
+            <div class="mv-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="mv-icon"><i class="fa-solid fa-eye"></i></div>
+                <h3>Our Vision</h3>
+                <p>To be a center of academic excellence, innovation, and research.</p>
+            </div>
+            <div class="mv-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="mv-icon"><i class="fa-solid fa-heart"></i></div>
+                <h3>Our Values</h3>
+                <p>Integrity, innovation, inclusivity and excellence in everything we do.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- OUR STORY (NEW) -->
+<section class="story-section">
+    <div class="container">
+        <div class="story-grid">
+            <div class="story-image" data-aos="fade-right">
+                <img src="{% static 'images/about.jpg' %}" alt="Our Story">
+                <div class="story-badge">
+                    <span class="num">25+</span>
+                    <span class="label">Years of Excellence</span>
+                </div>
+            </div>
+            <div class="story-content" data-aos="fade-left">
+                <h2 class="section-title" style="text-align:left;">Our Story</h2>
+                <p>Founded in 2000, Univio began as a small institution with a big dream — to provide quality education to every aspiring student. Over the past 25 years, we have grown into a premier university with thousands of graduates working across the globe.</p>
+                <p>Today, Univio stands as a symbol of academic excellence, modern infrastructure, and student-centric learning. Our commitment to research, innovation, and holistic development remains at the core of everything we do.</p>
+                <div class="story-stats">
+                    <div class="s-stat">
+                        <span class="s-num">5000+</span>
+                        <span class="s-label">Students</span>
+                    </div>
+                    <div class="s-stat">
+                        <span class="s-num">150+</span>
+                        <span class="s-label">Faculty</span>
+                    </div>
+                    <div class="s-stat">
+                        <span class="s-num">98%</span>
+                        <span class="s-label">Placement</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CAMPUS HIGHLIGHTS -->
+<section class="campus-highlights">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Campus Highlights</h2>
+        <p class="section-subtitle" data-aos="fade-up">World-class infrastructure for world-class education.</p>
+        <div class="highlight-grid">
+            <div class="highlight-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="h-icon"><i class="fa-solid fa-flask"></i></div>
+                <h4>Advanced Labs</h4>
+                <p>State-of-the-art laboratories for practical learning.</p>
+            </div>
+            <div class="highlight-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="h-icon"><i class="fa-solid fa-book-open"></i></div>
+                <h4>Modern Library</h4>
+                <p>Extensive collection of books, journals & e-resources.</p>
+            </div>
+            <div class="highlight-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="h-icon"><i class="fa-solid fa-building"></i></div>
+                <h4>Smart Classrooms</h4>
+                <p>Interactive learning spaces with latest technology.</p>
+            </div>
+            <div class="highlight-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="h-icon"><i class="fa-solid fa-user-group"></i></div>
+                <h4>Clubs & Societies</h4>
+                <p>Student clubs fostering creativity & leadership.</p>
+            </div>
+            <div class="highlight-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="h-icon"><i class="fa-solid fa-wifi"></i></div>
+                <h4>Wi-Fi Campus</h4>
+                <p>High-speed internet connectivity across the campus.</p>
+            </div>
+            <div class="highlight-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="h-icon"><i class="fa-solid fa-futbol"></i></div>
+                <h4>Sports Complex</h4>
+                <p>Indoor & outdoor sports facilities for student wellness.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ACHIEVEMENTS (NEW) -->
+<section class="achievements-section">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Our Achievements</h2>
+        <p class="section-subtitle" data-aos="fade-up">Recognition that reflects our commitment to excellence.</p>
+        <div class="achieve-grid">
+            <div class="achieve-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fa-solid fa-trophy"></i>
+                <h4>Best University Award</h4>
+                <p>Recognized by State Education Board, 2023</p>
+            </div>
+            <div class="achieve-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa-solid fa-star"></i>
+                <h4>NAAC A+ Grade</h4>
+                <p>Accredited with highest grade for academic quality</p>
+            </div>
+            <div class="achieve-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fa-solid fa-award"></i>
+                <h4>Top Placement Record</h4>
+                <p>98% placement rate for three consecutive years</p>
+            </div>
+            <div class="achieve-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fa-solid fa-globe"></i>
+                <h4>Global Partnerships</h4>
+                <p>MoUs with 20+ international universities</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FACULTY TEAM -->
+<section class="faculty-section">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Meet Our Faculty</h2>
+        <p class="section-subtitle" data-aos="fade-up">Experienced minds shaping brilliant futures.</p>
+        <div class="faculty-grid">
+            <div class="faculty-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="faculty-img-wrap">
+                    <img src="{% static 'images/about.jpg' %}" alt="Dr. John Smith">
+                </div>
+                <h4>Dr. John Smith</h4>
+                <p class="designation">Head of Computer Science</p>
+                <p class="exp">15+ Years Experience</p>
+            </div>
+            <div class="faculty-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="faculty-img-wrap">
+                    <img src="{% static 'images/about.jpg' %}" alt="Dr. Jane Doe">
+                </div>
+                <h4>Dr. Jane Doe</h4>
+                <p class="designation">Professor of Management</p>
+                <p class="exp">12+ Years Experience</p>
+            </div>
+            <div class="faculty-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="faculty-img-wrap">
+                    <img src="{% static 'images/about.jpg' %}" alt="Dr. Mark Lee">
+                </div>
+                <h4>Dr. Mark Lee</h4>
+                <p class="designation">Professor of Science</p>
+                <p class="exp">18+ Years Experience</p>
+            </div>
+            <div class="faculty-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="faculty-img-wrap">
+                    <img src="{% static 'images/about.jpg' %}" alt="Dr. Emily Clark">
+                </div>
+                <h4>Dr. Emily Clark</h4>
+                <p class="designation">Professor of Arts</p>
+                <p class="exp">10+ Years Experience</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STUDENT TESTIMONIALS -->
+<section class="testimonial-section">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">What Our Students Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                <p>"Univio provided me the platform to excel academically and socially."</p>
+                <h5>- Rahul Sharma</h5>
+            </div>
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                <p>"The faculty support and modern facilities are outstanding."</p>
+                <h5>- Ananya Singh</h5>
+            </div>
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                <p>"A vibrant campus life combined with excellent academics."</p>
+                <h5>- Karan Mehta</h5>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Join Univio & Achieve Your Dreams</h2>
+        <a href="{% url 'admission' %}" class="cta-btn"><span>Apply Now</span></a>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block title %}Notice Board - Univio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    <div class="container" style="max-width: 800px;">
+
+        <div class="section-card" data-aos="fade-up">
+            <h3>🔔 Notice Board</h3>
+
+            {% if notices %}
+                {% for notice in notices %}
+                    <div class="notice-item
+                        {% if notice.priority == 'high' %}notice-high
+                        {% elif notice.priority == 'medium' %}notice-medium
+                        {% else %}notice-low{% endif %}"
+                        style="margin-bottom:15px;">
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-1">{{ notice.title }}</h5>
+                            <span class="status-badge
+                                {% if notice.priority == 'high' %}status-rejected
+                                {% elif notice.priority == 'medium' %}status-pending
+                                {% else %}status-approved{% endif %}">
+                                {{ notice.priority|capfirst }}
+                            </span>
+                        </div>
+                        <small class="text-muted">{{ notice.created_at|date:"d M Y, h:i A" }}</small>
+                        <p class="mt-2 mb-0">{{ notice.content }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted text-center">Koi notice nahi hai abhi.</p>
+            {% endif %}
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="{% url 'dashboard' %}" class="fw-bold text-decoration-none">← Back to Dashboard</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+```
+
+---
+
+Sab karo phir **Admin Panel** mein jaake notice add karo:
+```
+http://127.0.0.1:8000/admin/home/notice/add/
