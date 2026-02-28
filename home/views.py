@@ -81,9 +81,7 @@ def admission_success(request):
     return render(request, 'home/admission_success.html')
 
 
-# =========================
-# AUTHENTICATION VIEWS
-# =========================
+
 
 # ===== SIGNUP WITH EMAIL VERIFICATION =====
 def signup_view(request):
@@ -162,6 +160,7 @@ def logout_view(request):
 # ===== OTP LOGIN - Step 1 (OTP bhejo) =====
 def login_otp_view(request):
     if request.user.is_authenticated:
+        
         return redirect('home')
 
     form = LoginOTPForm(request.POST or None)
