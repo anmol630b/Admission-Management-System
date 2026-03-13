@@ -43,7 +43,15 @@
                     <h4>Admission Status</h4>
                     <p>
                         {% if admission %}
-                            <span class="status-badge status-pending">Under Review</span>
+                            {% if admission.status == 'approved' %}
+                                <span class="status-badge status-approved">Approved</span>
+                            {% elif admission.status == 'rejected' %}
+                                <span class="status-badge status-rejected">Rejected</span>
+                            {% elif admission.status == 'under_review' %}
+                                <span class="status-badge status-pending">Under Review</span>
+                            {% else %}
+                                <span class="status-badge status-pending">Pending</span>
+                            {% endif %}
                         {% else %}
                             <span class="status-badge status-rejected">Not Applied</span>
                         {% endif %}
@@ -61,11 +69,11 @@
             </div>
             <div class="stat-card">
                 <div class="stat-icon" style="background: linear-gradient(135deg,#198754,#57c287);">
-                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                    <i class="fa-solid fa-clipboard-check"></i>
                 </div>
                 <div class="stat-info">
-                    <h4>Fee Status</h4>
-                    <p class="fee-pending">Pending</p>
+                    <h4>Attendance</h4>
+                    <p>{{ attendance_percentage }}%</p>
                 </div>
             </div>
             <div class="stat-card">
@@ -98,7 +106,17 @@
                             <tr><th>Applied On</th><td>{{ admission.submitted_at|date:"d M Y" }}</td></tr>
                             <tr>
                                 <th>Status</th>
-                                <td><span class="status-badge status-pending">Under Review</span></td>
+                                <td>
+                                    {% if admission.status == 'approved' %}
+                                        <span class="status-badge status-approved">Approved</span>
+                                    {% elif admission.status == 'rejected' %}
+                                        <span class="status-badge status-rejected">Rejected</span>
+                                    {% elif admission.status == 'under_review' %}
+                                        <span class="status-badge status-pending">Under Review</span>
+                                    {% else %}
+                                        <span class="status-badge status-pending">Pending</span>
+                                    {% endif %}
+                                </td>
                             </tr>
                         </table>
                     {% else %}
@@ -110,24 +128,31 @@
                     {% endif %}
                 </div>
 
-                <!-- ENROLLED COURSES -->
+                <!-- RECENT RESULTS -->
                 <div class="section-card" data-aos="fade-up">
                     <div class="card-header-row">
-                        <h3><i class="fa-solid fa-graduation-cap"></i> Enrolled Courses</h3>
+                        <h3><i class="fa-solid fa-chart-bar"></i> Recent Results</h3>
+                        <a href="{% url 'results' %}" class="dash-btn dash-btn-outline" style="padding:6px 14px; font-size:0.85rem;">View All</a>
                     </div>
-                    {% if admission %}
-                        <div class="course-item">
-                            <div class="course-icon">{{ admission.course|first }}</div>
-                            <div class="course-meta">
-                                <strong>{{ admission.course }}</strong>
-                                <p>Duration: 3 Years</p>
-                            </div>
-                            <span class="status-badge status-pending ms-auto">Pending</span>
-                        </div>
+                    {% if results %}
+                        <table class="fee-table">
+                            <thead>
+                                <tr><th>Subject</th><th>Marks</th><th>Grade</th></tr>
+                            </thead>
+                            <tbody>
+                                {% for result in results %}
+                                    <tr>
+                                        <td>{{ result.subject }}</td>
+                                        <td>{{ result.marks_obtained }}/{{ result.total_marks }}</td>
+                                        <td><strong>{{ result.grade }}</strong></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     {% else %}
                         <div class="empty-state">
-                            <i class="fa-solid fa-book-open"></i>
-                            <p>No course enrolled yet.</p>
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <p>No results available yet.</p>
                         </div>
                     {% endif %}
                 </div>
@@ -161,6 +186,23 @@
 
             <!-- RIGHT COLUMN -->
             <div class="col-lg-4">
+
+                <!-- ATTENDANCE SUMMARY -->
+                <div class="section-card" data-aos="fade-up">
+                    <div class="card-header-row">
+                        <h3><i class="fa-solid fa-clipboard-check"></i> Attendance</h3>
+                        <a href="{% url 'attendance' %}" class="dash-btn dash-btn-outline" style="padding:6px 14px; font-size:0.85rem;">View All</a>
+                    </div>
+                    <div style="text-align:center; padding: 15px 0;">
+                        <div style="width:100px; height:100px; border-radius:50%; background: {% if attendance_percentage >= 75 %}linear-gradient(135deg,#198754,#57c287){% elif attendance_percentage >= 60 %}linear-gradient(135deg,#ffc107,#ffe066){% else %}linear-gradient(135deg,#dc3545,#ff6b6b){% endif %}; display:flex; align-items:center; justify-content:center; margin: 0 auto 15px; color:#fff; font-size:1.4rem; font-weight:700;">
+                            {{ attendance_percentage }}%
+                        </div>
+                        <p style="color:#888; font-size:0.9rem;">{{ present_classes }} present out of {{ total_classes }} classes</p>
+                        {% if attendance_percentage < 75 %}
+                            <small style="color:#dc3545;"><i class="fa-solid fa-triangle-exclamation"></i> Below 75% threshold</small>
+                        {% endif %}
+                    </div>
+                </div>
 
                 <!-- NOTICES -->
                 <div class="section-card" data-aos="fade-up">
@@ -196,14 +238,24 @@
                         <h3><i class="fa-solid fa-link"></i> Quick Links</h3>
                     </div>
                     <div class="quick-links">
+                        <a href="{% url 'timetable' %}" class="quick-link">
+                            <span class="ql-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                            <span>Timetable</span>
+                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
+                        </a>
+                        <a href="{% url 'results' %}" class="quick-link">
+                            <span class="ql-icon"><i class="fa-solid fa-chart-bar"></i></span>
+                            <span>Results</span>
+                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
+                        </a>
+                        <a href="{% url 'attendance' %}" class="quick-link">
+                            <span class="ql-icon"><i class="fa-solid fa-clipboard-check"></i></span>
+                            <span>Attendance</span>
+                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
+                        </a>
                         <a href="{% url 'admission' %}" class="quick-link">
                             <span class="ql-icon"><i class="fa-solid fa-file-pen"></i></span>
                             <span>Admission</span>
-                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
-                        </a>
-                        <a href="{% url 'contact' %}" class="quick-link">
-                            <span class="ql-icon"><i class="fa-solid fa-phone"></i></span>
-                            <span>Contact</span>
                             <i class="fa-solid fa-chevron-right ql-arrow"></i>
                         </a>
                         <a href="{% url 'notice_board' %}" class="quick-link">
@@ -211,14 +263,14 @@
                             <span>Notices</span>
                             <i class="fa-solid fa-chevron-right ql-arrow"></i>
                         </a>
-                        <a href="{% url 'fee_payment' %}" class="quick-link">
-                            <span class="ql-icon"><i class="fa-solid fa-credit-card"></i></span>
-                            <span>Pay Fee</span>
-                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
-                        </a>
                         <a href="{% url 'fee_receipt' %}" class="quick-link">
                             <span class="ql-icon"><i class="fa-solid fa-file-pdf"></i></span>
                             <span>Fee Receipt</span>
+                            <i class="fa-solid fa-chevron-right ql-arrow"></i>
+                        </a>
+                        <a href="{% url 'contact' %}" class="quick-link">
+                            <span class="ql-icon"><i class="fa-solid fa-phone"></i></span>
+                            <span>Contact</span>
                             <i class="fa-solid fa-chevron-right ql-arrow"></i>
                         </a>
                         <a href="{% url 'logout' %}" class="quick-link quick-link-danger">

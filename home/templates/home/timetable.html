@@ -1,0 +1,77 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block title %}Timetable - Univio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<style>
+  .timetable-wrapper { padding: 40px 0; }
+  .timetable-header h2 { font-family: 'Playfair Display', serif; color: #1a1a2e; }
+  .day-card { background: #fff; border-radius: 15px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(26,26,46,0.08); }
+  .day-title { font-weight: 700; color: #1a1a2e; font-size: 1.1rem; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #ffcc00; }
+  .class-item { display: flex; align-items: center; gap: 15px; padding: 12px; border-radius: 10px; background: #f8f9ff; margin-bottom: 10px; }
+  .class-time { background: #1a1a2e; color: #ffcc00; padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
+  .class-subject { font-weight: 600; color: #1a1a2e; }
+  .class-teacher { font-size: 0.85rem; color: #888; }
+  .class-room { font-size: 0.85rem; color: #888; margin-left: auto; background: #e8e8f0; padding: 4px 10px; border-radius: 6px; }
+  .no-class { color: #aaa; font-size: 0.9rem; padding: 10px; text-align: center; }
+  .course-badge { background: linear-gradient(135deg, #1a1a2e, #2d2d5e); color: #ffcc00; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="timetable-wrapper">
+  <div class="container">
+
+    <div class="timetable-header mb-4" data-aos="fade-down">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <div>
+          <h2><i class="fa-solid fa-calendar-days"></i> Class Timetable</h2>
+          <p class="text-muted">Your weekly class schedule</p>
+        </div>
+        {% if course %}
+          <span class="course-badge">{{ course }}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if course %}
+      {% for day, classes in timetable_by_day.items %}
+        <div class="day-card" data-aos="fade-up">
+          <div class="day-title"><i class="fa-regular fa-calendar"></i> {{ day }}</div>
+          {% if classes %}
+            {% for cls in classes %}
+              <div class="class-item">
+                <span class="class-time">{{ cls.start_time|time:"H:i" }} - {{ cls.end_time|time:"H:i" }}</span>
+                <div>
+                  <div class="class-subject">{{ cls.subject }}</div>
+                  {% if cls.teacher %}
+                    <div class="class-teacher"><i class="fa-solid fa-chalkboard-user"></i> {{ cls.teacher }}</div>
+                  {% endif %}
+                </div>
+                {% if cls.room %}
+                  <span class="class-room"><i class="fa-solid fa-door-open"></i> {{ cls.room }}</span>
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% else %}
+            <p class="no-class"><i class="fa-regular fa-face-smile"></i> No classes scheduled</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="section-card text-center" data-aos="fade-up">
+        <i class="fa-solid fa-calendar-xmark" style="font-size:3rem; color:#ccc;"></i>
+        <p class="mt-3">No timetable available. Please complete your admission first.</p>
+        <a href="{% url 'admission' %}" class="dash-btn dash-btn-accent mt-2">Apply for Admission</a>
+      </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+      <a href="{% url 'dashboard' %}" class="fw-bold text-decoration-none">← Back to Dashboard</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

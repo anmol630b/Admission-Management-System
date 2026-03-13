@@ -1,0 +1,155 @@
+@login_required
+def student_id_card(request):
+    from reportlab.lib.utils import ImageReader
+    from reportlab.platypus import HRFlowable
+    import os, qrcode, io
+
+    admission = Admission.objects.filter(email=request.user.email).last()
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="UniVio_ID_{request.user.username}.pdf"'
+
+    card_width, card_height = 320, 500
+    p = canvas.Canvas(response, pagesize=(card_width, card_height))
+
+    # ── BACKGROUND ──
+    p.setFillColor(colors.HexColor('#0f0f1a'))
+    p.rect(0, 0, card_width, card_height, fill=True, stroke=False)
+
+    # ── DECORATIVE CIRCLES (background) ──
+    p.setFillColor(colors.HexColor('#1a1a35'))
+    p.circle(card_width - 30, card_height - 30, 80, fill=True, stroke=False)
+    p.circle(30, 30, 60, fill=True, stroke=False)
+
+    # ── TOP GOLD BAR ──
+    p.setFillColor(colors.HexColor('#ffcc00'))
+    p.rect(0, card_height - 10, card_width, 10, fill=True, stroke=False)
+
+    # ── SIDE ACCENT LINE ──
+    p.setFillColor(colors.HexColor('#ffcc00'))
+    p.rect(0, 0, 5, card_height, fill=True, stroke=False)
+
+    # ── COLLEGE LOGO AREA ──
+    p.setFillColor(colors.HexColor('#ffcc00'))
+    p.circle(card_width / 2, card_height - 55, 28, fill=True, stroke=False)
+    p.setFillColor(colors.HexColor('#0f0f1a'))
+    p.setFont("Helvetica-Bold", 18)
+    p.drawCentredString(card_width / 2, card_height - 62, "U")
+
+    # ── COLLEGE NAME ──
+    p.setFillColor(colors.HexColor('#ffcc00'))
+    p.setFont("Helvetica-Bold", 24)
+    p.drawCentredString(card_width / 2, card_height - 100, "UNIVIO")
+
+    p.setFillColor(colors.HexColor('#aaaacc'))
+    p.setFont("Helvetica", 8)
+    p.drawCentredString(card_width / 2, card_height - 114, "COLLEGE OF EXCELLENCE  •  EST. 2010")
+
+    # ── GOLD DIVIDER ──
+    p.setStrokeColor(colors.HexColor('#ffcc00'))
+    p.setLineWidth(0.8)
+    p.line(25, card_height - 124, card_width - 25, card_height - 124)
+
+    # ── STUDENT ID CARD LABEL ──
+    p.setFillColor(colors.HexColor('#ffcc00'))
+    p.setFont("Helvetica-Bold", 9)
+    p.drawCentredString(card_width / 2, card_height - 140, "✦  STUDENT IDENTITY CARD  ✦")
+
+    # ── PROFILE PHOTO ──
+    photo_y = card_height - 250
+    photo_x = card_width / 2 - 45
+
+    # Photo border ring
+    p.setStrokeColor(colors.HexColor('#ffcc00'))
+    p.setLineWidth(2.5)
+    p.circle(card_width / 2, photo_y + 45, 50, fill=False, stroke=True)
+
+    if request.user.profile_photo:
+        try:
+            photo_path = request.user.profile_photo.path
+            if os.path.exists(photo_path):
+                p.drawImage(ImageReader(photo_path), photo_x, photo_y, width=90, height=90, preserveAspectRatio=True, mask='auto')
+        except Exception:
+            pass
+    else:
+        p.setFillColor(colors.HexColor('#1e1e3a'))
+        p.circle(card_width / 2, photo_y + 45, 46, fill=True, stroke=False)
+        p.setFillColor(colors.HexColor('#ffcc00'))
+        p.setFont("Helvetica-Bold", 32)
+        p.drawCentredString(card_width / 2, photo_y + 30, request.user.username[0].upper())
+
+    # ── STUDENT NAME ──
+    p.setFillColor(colors.white)
+    p.setFont("Helvetica-Bold", 16)
+    name_display = admission.name.upper() if admission and admission.name else request.user.username.upper()
+    p.drawCentredString(card_width / 2, photo_y - 18, name_display)
+
+    # ── COURSE BADGE ──
+    if admission:
+        badge_text = admission.course
+        badge_w = 90
+        badge_x = card_width / 2 - badge_w / 2
+        p.setFillColor(colors.HexColor('#ffcc00'))
+        p.roundRect(badge_x, photo_y - 42, badge_w, 18, 9, fill=True, stroke=False)
+        p.setFillColor(colors.HexColor('#0f0f1a'))
+        p.setFont("Helvetica-Bold", 9)
+        p.drawCentredString(card_width / 2, photo_y - 33, badge_text)
+
+    # ── INFO BOX BACKGROUND ──
+    info_box_y = 60
+    info_box_h = photo_y - 60
+    p.setFillColor(colors.HexColor('#16162a'))
+    p.roundRect(20, info_box_y, card_width - 40, info_box_h - 10, 10, fill=True, stroke=False)
+
+    # ── INFO ROWS ──
+    info_items = [
+        ("fa", "Student ID", f"UNV{request.user.id:05d}"),
+        ("fa", "Username", request.user.username),
+        ("fa", "Email", request.user.email[:28] + "..." if len(request.user.email) > 28 else request.user.email),
+        ("fa", "Phone", request.user.phone if request.user.phone else "Not Provided"),
+        ("fa", "Valid Till", "May 2027"),
+    ]
+
+    y = photo_y - 62
+    for _, label, value in info_items:
+        # Label
+        p.setFillColor(colors.HexColor('#888899'))
+        p.setFont("Helvetica", 7)
+        p.drawString(35, y, label.upper())
+        # Value
+        p.setFillColor(colors.white)
+        p.setFont("Helvetica-Bold", 9)
+        p.drawString(35, y - 13, value)
+        # Thin divider
+        p.setStrokeColor(colors.HexColor('#2a2a45'))
+        p.setLineWidth(0.5)
+        p.line(35, y - 18, card_width - 35, y - 18)
+        y -= 30
+
+    # ── QR CODE ──
+    try:
+        import qrcode
+        qr_data = f"UNIVIO|{request.user.username}|UNV{request.user.id:05d}|{request.user.email}"
+        qr = qrcode.make(qr_data)
+        qr_buffer = io.BytesIO()
+        qr.save(qr_buffer, format='PNG')
+        qr_buffer.seek(0)
+        p.drawImage(ImageReader(qr_buffer), card_width - 75, 38, width=55, height=55)
+    except Exception:
+        pass
+
+    # ── BOTTOM BAR ──
+    p.setFillColor(colors.HexColor('#ffcc00'))
+    p.rect(0, 0, card_width, 32, fill=True, stroke=False)
+    p.setFillColor(colors.HexColor('#0f0f1a'))
+    p.setFont("Helvetica-Bold", 7.5)
+    p.drawString(15, 19, "univio.edu.in")
+    p.drawString(15, 9, "info@univio.edu.in  |  +91 98765 43210")
+
+    # ── BOTTOM LEFT ACCENT ──
+    p.setFillColor(colors.HexColor('#0f0f1a'))
+    p.rect(0, 0, 5, 32, fill=True, stroke=False)
+
+    p.showPage()
+    p.save()
+    return response

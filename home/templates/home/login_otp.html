@@ -1,41 +1,71 @@
 {% extends "home/base.html" %}
-{% block title %}Login with OTP{% endblock %}
+{% load static %}
+{% block title %}Login with OTP - Univio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
 
 {% block content %}
-<div class="container" style="max-width: 450px; margin-top: 100px;">
-    <div class="card shadow-lg border-0">
-        <div class="card-body p-4">
-            <h3 class="card-title text-center mb-4" style="font-weight: 700;">Login with OTP</h3>
+<div class="login-page-wrapper">
+  <div class="login-card">
 
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} text-center">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-
-            <form method="POST" action="{% url 'login_otp' %}">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username" placeholder="Enter username" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Registered Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="Enter registered email" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100 mt-3">Send OTP</button>
-            </form>
-
-            <div class="text-center mt-3">
-                <p class="mb-0">
-                    Simple login karna hai?
-                    <a href="{% url 'login' %}" class="fw-bold text-decoration-none">Login here</a>
-                </p>
-            </div>
-        </div>
+    <div class="login-logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
     </div>
+
+    <h2 class="login-heading">Login with OTP</h2>
+    <p class="login-sub">OTP will be sent to your registered email</p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="login-alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="{% url 'login_otp' %}">
+      {% csrf_token %}
+
+      <div class="login-group">
+        <label>Username</label>
+        <div class="input-wrap">
+          <span class="input-icon"><i class="fas fa-user"></i></span>
+          <input type="text" name="username" placeholder="Enter your username" required>
+        </div>
+      </div>
+
+      <div class="login-group">
+        <label>Registered Email</label>
+        <div class="input-wrap">
+          <span class="input-icon"><i class="fas fa-envelope"></i></span>
+          <input type="email" name="email" placeholder="Enter your registered email" required>
+        </div>
+      </div>
+
+      <button type="submit" class="login-submit-btn">
+        <i class="fas fa-paper-plane"></i>
+        <span>Send OTP</span>
+      </button>
+    </form>
+
+    <div class="login-divider">or</div>
+
+    <a href="{% url 'login' %}" class="otp-btn">
+      <i class="fas fa-key"></i>
+      Login with Password instead
+    </a>
+
+    <div class="login-footer">
+      Don't have an account?
+      <a href="{% url 'signup' %}">Signup</a>
+    </div>
+
+  </div>
 </div>
 {% endblock %}

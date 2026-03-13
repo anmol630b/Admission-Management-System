@@ -1,15 +1,15 @@
 {% extends "home/base.html" %}
 {% load static %}
-{% block title %}Login{% endblock %}
+{% block title %}Login - Univio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
 
 {% block content %}
-
-<link rel="stylesheet" href="{% static 'css/login.css' %}">
-
 <div class="login-page-wrapper">
   <div class="login-card">
 
-    <!-- Logo -->
     <div class="login-logo">
       <div class="logo-mark">
         <svg viewBox="0 0 24 24">
@@ -23,14 +23,12 @@
     <h2 class="login-heading">Welcome Back</h2>
     <p class="login-sub">Sign in to your Univio account</p>
 
-    <!-- Messages -->
     {% if messages %}
       {% for message in messages %}
         <div class="login-alert alert-{{ message.tags }}">{{ message }}</div>
       {% endfor %}
     {% endif %}
 
-    <!-- Form -->
     <form method="POST" action="{% url 'login' %}">
       {% csrf_token %}
 
@@ -44,9 +42,8 @@
         {% endif %}
       {% endif %}
 
-      <!-- Username -->
       <div class="login-group">
-        <label for="username">Username or Email</label>
+        <label for="username">Username</label>
         <div class="input-wrap">
           <span class="input-icon"><i class="fas fa-user"></i></span>
           <input
@@ -59,7 +56,6 @@
         </div>
       </div>
 
-      <!-- Password -->
       <div class="login-group">
         <div class="pass-label-row">
           <label for="password">Password</label>
@@ -116,5 +112,3 @@
 </script>
 
 {% endblock %}
-```
-

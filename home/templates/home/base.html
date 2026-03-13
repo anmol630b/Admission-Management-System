@@ -69,6 +69,50 @@
             </a>
           </li>
 
+          {% if user.is_authenticated %}
+
+          <!-- STUDENT PORTAL DROPDOWN -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+              <i class="fa-solid fa-graduation-cap nav-icon"></i> Student Portal
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="{% url 'dashboard' %}">
+                  <i class="fa-solid fa-gauge"></i> Dashboard
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'timetable' %}">
+                  <i class="fa-solid fa-calendar-days"></i> Timetable
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'results' %}">
+                  <i class="fa-solid fa-chart-bar"></i> Results
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'attendance' %}">
+                  <i class="fa-solid fa-clipboard-check"></i> Attendance
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'notice_board' %}">
+                  <i class="fa-solid fa-bell"></i> Notice Board
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item" href="{% url 'fee_receipt' %}">
+                  <i class="fa-solid fa-file-pdf"></i> Fee Receipt
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          {% endif %}
+
           <!-- DIVIDER -->
           <li class="nav-divider"></li>
 
@@ -155,6 +199,9 @@
             <li><a href="{% url 'about' %}"><i class="fa-solid fa-chevron-right"></i> About Us</a></li>
             <li><a href="{% url 'admission' %}"><i class="fa-solid fa-chevron-right"></i> Admissions</a></li>
             <li><a href="{% url 'contact' %}"><i class="fa-solid fa-chevron-right"></i> Contact</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'dashboard' %}"><i class="fa-solid fa-chevron-right"></i> Dashboard</a></li>
+            {% endif %}
           </ul>
         </div>
 
@@ -214,7 +261,6 @@
       lastScroll = currentScroll;
     });
 
-    // Active nav link
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
       if (link.href === window.location.href) {

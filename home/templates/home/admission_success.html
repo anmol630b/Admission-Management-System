@@ -1,11 +1,116 @@
 {% extends "home/base.html" %}
+{% load static %}
+{% block title %}Application Submitted - Univio{% endblock %}
 
-{% block title %}Admission Submitted{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<style>
+  .success-wrapper {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+  }
+  .success-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 60px 50px;
+    text-align: center;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 10px 50px rgba(26,26,46,0.10);
+  }
+  .success-icon {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #198754, #57c287);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    font-size: 2.5rem;
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(25,135,84,0.25);
+  }
+  .success-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #1a1a2e;
+    margin-bottom: 12px;
+  }
+  .success-card p {
+    color: #666;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+  }
+  .success-id {
+    background: #f8f9ff;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+    color: #888;
+  }
+  .success-id strong { color: #1a1a2e; }
+  .success-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary-success {
+    background: linear-gradient(135deg, #1a1a2e, #2d2d5e);
+    color: #fff;
+    padding: 13px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.3s;
+  }
+  .btn-primary-success:hover { color: #ffcc00; }
+  .btn-outline-success {
+    border: 2px solid #1a1a2e;
+    color: #1a1a2e;
+    padding: 12px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.3s;
+  }
+  .btn-outline-success:hover { background: #1a1a2e; color: #fff; }
+</style>
+{% endblock %}
 
 {% block content %}
-<section class="admission-success" style="text-align:center; padding:50px;">
-    <h2>Thank You!</h2>
-    <p>Your admission form has been submitted successfully.</p>
-    <a href="{% url 'home' %}" class="btn">Go to Home</a>
-</section>
+<div class="success-wrapper">
+  <div class="success-card" data-aos="zoom-in">
+
+    <div class="success-icon">
+      <i class="fa-solid fa-check"></i>
+    </div>
+
+    <h2>Application Submitted!</h2>
+    <p>Your admission form has been successfully submitted. Our team will verify your details and update you via email.</p>
+
+    <div class="success-id">
+      <i class="fa-regular fa-clock"></i> &nbsp;
+      Expected response time: <strong>2-3 working days</strong>
+    </div>
+
+    <div class="success-actions">
+      <a href="{% url 'dashboard' %}" class="btn-primary-success">
+        <i class="fa-solid fa-gauge"></i> Go to Dashboard
+      </a>
+      <a href="{% url 'home' %}" class="btn-outline-success">
+        <i class="fa-solid fa-house"></i> Home
+      </a>
+    </div>
+
+  </div>
+</div>
 {% endblock %}

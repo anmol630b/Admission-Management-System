@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from home.models import CustomUser, Contact, Admission, OTPModel, Notice
+from home.models import CustomUser, Contact, Admission, OTPModel, Notice, Timetable, Result, Attendance, FeePayment
 
 
 # =========================
@@ -22,8 +22,8 @@ class CustomUserAdmin(UserAdmin):
 # =========================
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'phone', 'date']
-    search_fields = ['name', 'email']
+    list_display = ['name', 'email', 'phone', 'subject', 'date']
+    search_fields = ['name', 'email', 'subject']
     ordering = ['-date']
 
 
@@ -32,8 +32,8 @@ class ContactAdmin(admin.ModelAdmin):
 # =========================
 @admin.register(Admission)
 class AdmissionAdmin(admin.ModelAdmin):
-    list_display = ['name', 'course', 'email', 'phone', 'submitted_at']
-    list_filter = ['course']
+    list_display = ['name', 'course', 'email', 'phone', 'status', 'submitted_at']
+    list_filter = ['course', 'status']
     search_fields = ['name', 'email', 'phone']
     ordering = ['-submitted_at']
 
@@ -55,4 +55,48 @@ class NoticeAdmin(admin.ModelAdmin):
     list_display = ['title', 'priority', 'is_active', 'created_at']
     list_filter = ['priority', 'is_active']
     search_fields = ['title', 'content']
+    ordering = ['-created_at']
+
+
+# =========================
+# TIMETABLE ADMIN
+# =========================
+@admin.register(Timetable)
+class TimetableAdmin(admin.ModelAdmin):
+    list_display = ['course', 'day', 'subject', 'start_time', 'end_time', 'teacher', 'room']
+    list_filter = ['course', 'day']
+    search_fields = ['course', 'subject', 'teacher']
+    ordering = ['course', 'day', 'start_time']
+
+
+# =========================
+# RESULT ADMIN
+# =========================
+@admin.register(Result)
+class ResultAdmin(admin.ModelAdmin):
+    list_display = ['student', 'course', 'semester', 'subject', 'marks_obtained', 'total_marks', 'grade']
+    list_filter = ['course', 'semester', 'grade']
+    search_fields = ['student__username', 'subject']
+    ordering = ['-created_at']
+
+
+# =========================
+# ATTENDANCE ADMIN
+# =========================
+@admin.register(Attendance)
+class AttendanceAdmin(admin.ModelAdmin):
+    list_display = ['student', 'course', 'subject', 'date', 'is_present']
+    list_filter = ['course', 'subject', 'is_present']
+    search_fields = ['student__username', 'subject']
+    ordering = ['-date']
+
+
+# =========================
+# FEE PAYMENT ADMIN
+# =========================
+@admin.register(FeePayment)
+class FeePaymentAdmin(admin.ModelAdmin):
+    list_display = ['student', 'amount', 'year', 'status', 'payment_id', 'paid_at']
+    list_filter = ['status', 'year']
+    search_fields = ['student__username', 'payment_id']
     ordering = ['-created_at']
