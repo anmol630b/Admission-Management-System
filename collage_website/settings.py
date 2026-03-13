@@ -13,6 +13,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    'jazzmin',
     'home.apps.HomeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -107,3 +108,79 @@ DEFAULT_FROM_EMAIL = 'Univio <hypermili57@gmail.com>'
 # =========================
 RAZORPAY_KEY_ID = 'rzp_test_SLYrLj0iZMZOK9'
 RAZORPAY_KEY_SECRET = '284anbLyo6SQC9cQ3cgXjrFn'
+
+# =========================
+# JAZZMIN ADMIN SETTINGS
+# =========================
+JAZZMIN_SETTINGS = {
+    "site_title": "Univio Admin",
+    "site_header": "Univio",
+    "site_brand": "Univio College",
+    "site_logo": None,
+    "welcome_sign": "Welcome to Univio Admin Panel",
+    "copyright": "Univio College 2026",
+    "search_model": ["home.CustomUser", "home.Admission"],
+    "topmenu_links": [
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "View Site", "url": "/", "new_window": True},
+        {"model": "home.CustomUser"},
+    ],
+    "usermenu_links": [
+        {"name": "View Site", "url": "/", "new_window": True},
+    ],
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "home.customuser": "fas fa-user-graduate",
+        "home.admission": "fas fa-file-pen",
+        "home.contact": "fas fa-phone",
+        "home.notice": "fas fa-bell",
+        "home.timetable": "fas fa-calendar-days",
+        "home.result": "fas fa-chart-bar",
+        "home.attendance": "fas fa-clipboard-check",
+        "home.feepayment": "fas fa-credit-card",
+        "home.otpmodel": "fas fa-key",
+    },
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+    "related_modal_active": False,
+    "custom_css": None,
+    "custom_js": None,
+    "use_google_fonts_cdn": True,
+    "show_ui_builder": False,
+    "changeform_format": "horizontal_tabs",
+    "language_chooser": False,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-warning",
+    "accent": "accent-warning",
+    "navbar": "navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-warning",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "darkly",
+    "dark_mode_theme": "darkly",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
+}
