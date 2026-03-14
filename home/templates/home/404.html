@@ -1,0 +1,16 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block title %}404 - Page Not Found - Univio{% endblock %}
+{% block content %}
+<div style="min-height:80vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:40px 20px;">
+    <div>
+        <div style="font-family:'Playfair Display',serif; font-size:8rem; font-weight:900; color:#4f8ef7; line-height:1; margin-bottom:20px;">404</div>
+        <h2 style="font-family:'Playfair Display',serif; font-size:2rem; color:#e2dfd8; margin-bottom:16px;">Page Not Found</h2>
+        <p style="color:#8b8fa8; font-size:1.05rem; margin-bottom:36px; max-width:440px; margin-left:auto; margin-right:auto;">Yeh page exist nahi karta ya move ho gaya hai. Ghabrao mat!</p>
+        <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+            <a href="/" style="background:linear-gradient(135deg,#c8923a,#e8b96a); color:#fff; padding:14px 36px; border-radius:50px; font-weight:600; text-decoration:none; font-size:1rem;">🏠 Home Jao</a>
+            <a href="/contact" style="background:transparent; color:#4f8ef7; border:1.5px solid #4f8ef7; padding:14px 36px; border-radius:50px; font-weight:600; text-decoration:none; font-size:1rem;">📞 Contact Karo</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

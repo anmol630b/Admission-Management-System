@@ -650,3 +650,5 @@ def student_id_card(request):
     p.showPage()
     p.save()
     return response
+def custom_404(request, exception):
+    return render(request, 'home/404.html', status=404)
