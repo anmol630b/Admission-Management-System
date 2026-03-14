@@ -546,3 +546,64 @@ body {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; }
 }
+/* =============================================
+   FORM INPUTS GLOBAL FIX
+   ============================================= */
+input, textarea, select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+input[type="file"] {
+  color: var(--text-main) !important;
+  background: var(--light-bg2) !important;
+  border: 1.5px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 10px 14px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 0.95rem !important;
+  transition: var(--transition) !important;
+  outline: none !important;
+  width: 100%;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.15) !important;
+  background: var(--light-bg) !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1 !important;
+}
+
+select option {
+  background: var(--light-bg2) !important;
+  color: var(--text-main) !important;
+}
+
+/* Bootstrap form override */
+.form-control, .form-select {
+  color: var(--text-main) !important;
+  background-color: var(--light-bg2) !important;
+  border-color: var(--border) !important;
+}
+
+.form-control:focus, .form-select:focus {
+  color: var(--text-main) !important;
+  background-color: var(--light-bg) !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.15) !important;
+}
+
+.form-control::placeholder {
+  color: var(--text-muted) !important;
+}
+
+label, .form-label {
+  color: var(--text-main) !important;
+  font-weight: 500 !important;
+}
