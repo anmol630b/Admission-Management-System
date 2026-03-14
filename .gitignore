@@ -6,3 +6,4 @@ venv/
 media/
 .env
 *.log
+.env
