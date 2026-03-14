@@ -242,21 +242,28 @@
   <!-- Navbar Scroll Script -->
   <script>
     let lastScroll = 0;
+    let ticking = false;
     const navbar = document.getElementById("mainNavbar");
     window.addEventListener("scroll", function () {
-      const currentScroll = window.pageYOffset;
-      if (currentScroll > 50) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          const currentScroll = window.pageYOffset;
+          if (currentScroll > 50) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+          if (currentScroll > lastScroll && currentScroll > 100) {
+            navbar.classList.add("nav-hide");
+          } else {
+            navbar.classList.remove("nav-hide");
+          }
+          lastScroll = currentScroll;
+          ticking = false;
+        });
+        ticking = true;
       }
-      if (currentScroll > lastScroll && currentScroll > 100) {
-        navbar.classList.add("nav-hide");
-      } else {
-        navbar.classList.remove("nav-hide");
-      }
-      lastScroll = currentScroll;
-    });
+    }, { passive: true });
 
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
