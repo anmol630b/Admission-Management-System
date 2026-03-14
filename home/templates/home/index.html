@@ -224,9 +224,10 @@
         <h2>Stay Connected with Univio</h2>
         <p>Subscribe to get updates on admissions, events, and campus news.</p>
         <div class="newsletter-form">
-            <input type="email" placeholder="Enter your email address...">
-            <button type="button">Subscribe</button>
+            <input type="email" id="newsletter-email" placeholder="Enter your email address...">
+            <button type="button" onclick="subscribeNewsletter()">Subscribe</button>
         </div>
+        <p id="newsletter-msg" style="margin-top:12px; color:#e8b96a; display:none;">✅ Thank you for subscribing!</p>
     </div>
 </section>
 
@@ -239,6 +240,17 @@
 </section>
 
 {% block extra_js %}
+<script>
+function subscribeNewsletter() {
+    const email = document.getElementById("newsletter-email").value;
+    if (!email || !email.includes("@")) {
+        alert("Please enter a valid email address!");
+        return;
+    }
+    document.getElementById("newsletter-msg").style.display = "block";
+    document.getElementById("newsletter-email").value = "";
+}
+</script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const counters = document.querySelectorAll('.counter');
