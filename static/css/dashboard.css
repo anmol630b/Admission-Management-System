@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
-
 :root {
   --primary: #4f8ef7;
   --primary-dark: #1a56db;
@@ -170,7 +168,7 @@ body {
 }
 
 .stat-card {
-  background: var(--white);
+  background: var(--light-bg2);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 24px 22px;
@@ -216,7 +214,7 @@ body {
 
 /* ---- SECTION CARDS ---- */
 .section-card {
-  background: var(--white);
+  background: var(--light-bg2);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px 28px;
