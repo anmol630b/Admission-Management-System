@@ -1,1 +1,1 @@
-web: gunicorn collage_website.wsgi --log-file -
+web: gunicorn collage_website.wsgi:application
