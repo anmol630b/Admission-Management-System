@@ -32,7 +32,7 @@
 </div>
 
 <!-- WHY CHOOSE US -->
-<section class="why-us">
+<section class="why-us" style="background: var(--light-bg);">
     <div class="container">
         <h2 class="section-title" data-aos="fade-up">Why Choose Univio</h2>
         <p class="section-subtitle" data-aos="fade-up">Excellence that sets us apart from the rest.</p>
@@ -209,7 +209,7 @@
 </section>
 
 <!-- SCHOLARSHIP -->
-<section class="scholarship">
+<section class="scholarship" style="background: var(--light-bg2);">
     <div class="container">
         <h2 class="section-title" data-aos="fade-up">Scholarships Available</h2>
         <p class="section-subtitle" data-aos="fade-up">We believe talent should never be limited by finances.</p>
@@ -309,7 +309,7 @@
 </section>
 
 <!-- FAQ -->
-<section class="faq">
+<section class="faq" style="background: var(--light-bg);">
     <div class="container">
         <h2 class="section-title" data-aos="fade-up">Frequently Asked Questions</h2>
         <p class="section-subtitle" data-aos="fade-up">Got questions? We have answers.</p>
@@ -414,7 +414,7 @@
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-AOS.init({ duration: 1000, once: true });
+AOS.init({ duration: 500, once: true, offset: 80, easing: "ease-out-cubic" });
 
 const counters = document.querySelectorAll('.counter');
 const observer = new IntersectionObserver((entries) => {

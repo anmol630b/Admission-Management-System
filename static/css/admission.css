@@ -733,8 +733,8 @@ details p {
   border-radius: var(--radius-sm);
   font-family: 'DM Sans', sans-serif;
   font-size: 0.97rem;
-  color: var(--text-main);
-  background: var(--light-bg);
+  color: #e2dfd8;
+  background: #13151c;
   outline: none;
   transition: var(--transition);
   appearance: none;
