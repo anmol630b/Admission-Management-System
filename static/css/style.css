@@ -607,3 +607,63 @@ label, .form-label {
   color: var(--text-main) !important;
   font-weight: 500 !important;
 }
+
+/* =============================================
+   FORM INPUTS GLOBAL FIX
+   ============================================= */
+input, textarea, select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+input[type="file"] {
+  color: #e2dfd8 !important;
+  background: #1a1d27 !important;
+  border: 1.5px solid #2a2d3a !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 0.95rem !important;
+  outline: none !important;
+  width: 100%;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #4f8ef7 !important;
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.15) !important;
+  background: #13151c !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #8b8fa8 !important;
+  opacity: 1 !important;
+}
+
+select option {
+  background: #1a1d27 !important;
+  color: #e2dfd8 !important;
+}
+
+.form-control, .form-select {
+  color: #e2dfd8 !important;
+  background-color: #1a1d27 !important;
+  border-color: #2a2d3a !important;
+}
+
+.form-control:focus, .form-select:focus {
+  color: #e2dfd8 !important;
+  background-color: #13151c !important;
+  border-color: #4f8ef7 !important;
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.15) !important;
+}
+
+.form-control::placeholder {
+  color: #8b8fa8 !important;
+}
+
+label, .form-label {
+  color: #e2dfd8 !important;
+  font-weight: 500 !important;
+}
