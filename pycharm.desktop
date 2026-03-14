@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=PyCharm
-Comment=Python IDE
-Exec=pycharm
-Icon=/usr/share/icons/hicolor/128x128/apps/pycharm.png
-Type=Application
-Categories=Development;IDE;
-Terminal=false
