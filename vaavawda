@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
 :root {
   --primary: #4f8ef7;
   --primary-dark: #1a56db;
@@ -17,6 +19,11 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background-color: #0d0f14 !important;
+  background: #0d0f14 !important;
+}
 
 body {
   font-family: 'DM Sans', sans-serif;

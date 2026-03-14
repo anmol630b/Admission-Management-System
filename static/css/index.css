@@ -2,8 +2,6 @@
    UNIVIO - Advanced CSS
    ============================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
-
 /* ---- CSS Variables ---- */
 :root {
   --primary: #4f8ef7;
@@ -79,7 +77,7 @@ a { text-decoration: none; color: inherit; }
   min-height: 55vh;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll;
   display: flex;
   align-items: center;
   justify-content: center;
