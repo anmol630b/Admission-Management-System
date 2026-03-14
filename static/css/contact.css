@@ -128,7 +128,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .info-card {
-  background: var(--light-bg2);
+  background: var(--light-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 36px 24px;
@@ -189,7 +189,7 @@ a { text-decoration: none; color: inherit; }
 /* ---- CONTACT FORM + MAP GRID ---- */
 .contact-section {
   padding: 80px 0 100px;
-  background: var(--light-bg2);
+  background: var(--light-bg);
 }
 
 .contact-grid {
