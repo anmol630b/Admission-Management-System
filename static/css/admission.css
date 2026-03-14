@@ -184,7 +184,7 @@ a { text-decoration: none; color: inherit; }
 /* ---- WHY US ---- */
 .why-us {
   padding: 100px 0;
-  background: var(--white);
+  background: #f8f9fa;
 }
 
 .why-grid {
@@ -462,7 +462,7 @@ a { text-decoration: none; color: inherit; }
 /* ---- SCHOLARSHIP ---- */
 .scholarship {
   padding: 100px 0;
-  background: var(--white);
+  background: #f8f9fa;
 }
 
 .scholar-grid {
@@ -630,7 +630,7 @@ tbody td strong {
 /* ---- FAQ ---- */
 .faq {
   padding: 100px 0;
-  background: var(--white);
+  background: #f8f9fa;
 }
 
 .faq-list {
