@@ -189,7 +189,7 @@ a { text-decoration: none; color: inherit; }
 /* ---- CONTACT FORM + MAP GRID ---- */
 .contact-section {
   padding: 80px 0 100px;
-  background: var(--light-bg);
+  background: #ffffff;
 }
 
 .contact-grid {
