@@ -5,7 +5,6 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/admission.css' %}">
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -412,9 +411,7 @@
     <i class="fa-brands fa-whatsapp"></i>
 </a>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-AOS.init({ duration: 500, once: true, offset: 80, easing: "ease-out-cubic" });
 
 const counters = document.querySelectorAll('.counter');
 const observer = new IntersectionObserver((entries) => {
