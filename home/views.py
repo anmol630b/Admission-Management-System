@@ -93,20 +93,10 @@ def signup_view(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
-            token = default_token_generator.make_token(user)
-            uid = urlsafe_base64_encode(force_bytes(user.pk))
-            verification_link = request.build_absolute_uri(f"/verify-email/{uid}/{token}/")
-            send_mail(
-                subject="Verify Your Email - Univio",
-                message=f"Click the link below to verify your email:\n\n{verification_link}\n\nIf you did not create this account, please ignore this email.",
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[user.email],
-            )
-            messages.success(request, "Account created! Check your email to verify your account.")
-            return redirect('login')
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Account created successfully! Welcome to Univio.")
+            return redirect('home')
     else:
         form = CustomUserCreationForm()
     return render(request, 'home/signup.html', {'form': form})
